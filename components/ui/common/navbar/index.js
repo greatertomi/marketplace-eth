@@ -30,7 +30,7 @@ export default function Navbar() {
                 </a>
               </Link>
               <a
-                href="#"
+                href="/"
                 className="px-8 py-3 rounded-md border text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
               >
                 Connect
