@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { useWeb3 } from "@components/providers";
 import { Button } from "@components/ui/common";
-import { useRouter } from "next/router";
+import { useAccount } from "@components/web3/hooks/useAccount";
 
 export default function Navbar() {
   const { connect, isWeb3Loaded, isLoading } = useWeb3();
-  const router = useRouter();
+  const { account } = useAccount();
 
   return (
     <section>
+      {account}
       <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
         <nav className="relative" aria-label="Global">
           <div className="flex justify-between items-center">
