@@ -1,5 +1,5 @@
-import { handler as createUseAccount } from "@components/providers/hooks/handler";
+import { handler as createUseAccount } from "@components/providers/hooks/useAccount";
 
-export const setupHooks = (web3) => {
-  return { useAccount: createUseAccount(web3) };
+export const setupHooks = (web3, provider) => {
+  return { useAccount: createUseAccount(web3, provider) };
 };
