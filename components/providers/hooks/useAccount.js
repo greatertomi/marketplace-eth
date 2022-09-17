@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 // You can hash this address with keccak256
 const adminAddresses = {
-  "0x726E4999AEB544b52C8d026DB8A21d0c2e740E1f": true,
+  "0x1776F38286401E3A12f5E8Ad6929e2bEAF4Cf959": true,
 };
 
 export const handler = (web3, provider) => () => {
