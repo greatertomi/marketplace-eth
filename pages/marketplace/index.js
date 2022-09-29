@@ -3,6 +3,8 @@ import { BaseLayout } from "@components/ui/layout";
 import { getAllCourses } from "@content/courses/fetcher";
 import Walletbar from "@components/ui/web3/walletbar";
 import { useAccount, useNetwork } from "@components/hooks/web3";
+import { Button } from "@components/ui/common";
+import { OrderModal } from "@components/ui/order";
 
 export default function Marketplace({ courses }) {
   const { account } = useAccount();
@@ -22,8 +24,19 @@ export default function Marketplace({ courses }) {
       </div>
 
       <CourseList courses={courses}>
-        {(course) => <CourseCard course={course} key={course.id} />}
+        {(course) => (
+          <CourseCard
+            course={course}
+            key={course.id}
+            Footer={() => (
+              <div className="mt-4">
+                <Button variant="lightPurple">Purchase</Button>
+              </div>
+            )}
+          />
+        )}
       </CourseList>
+      <OrderModal />
     </>
   );
 }
