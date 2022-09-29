@@ -13,3 +13,10 @@ export const useNetwork = () => {
   const swrRes = enhanceHook(useHooks((hooks) => hooks.useNetwork)());
   return { network: swrRes };
 };
+
+export const useWalletInfo = () => {
+  const { account } = useAccount();
+  const { network } = useNetwork();
+  const canPurchaseCourse = !!(account.data && network.isSupported);
+  return { account, network, canPurchaseCourse };
+};

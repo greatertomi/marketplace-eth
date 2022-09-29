@@ -2,13 +2,18 @@ import { CourseCard, CourseList } from "@components/ui/course";
 import { BaseLayout } from "@components/ui/layout";
 import { getAllCourses } from "@content/courses/fetcher";
 import Walletbar from "@components/ui/web3/walletbar";
-import { useAccount, useNetwork } from "@components/hooks/web3";
+import { useWalletInfo } from "@components/hooks/web3";
 import { Button } from "@components/ui/common";
 import { OrderModal } from "@components/ui/order";
+import { useState } from "react";
+import { useEthPrice } from "@components/hooks/useEthPrice";
+import { EthRates } from "@components/ui/web3";
 
 export default function Marketplace({ courses }) {
-  const { account } = useAccount();
-  const { network } = useNetwork();
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const { account, network, canPurchaseCourse } = useWalletInfo();
+  const { eth } = useEthPrice();
+
   return (
     <>
       <div className="py-4">
@@ -21,6 +26,7 @@ export default function Marketplace({ courses }) {
             hasInitialResponse: network.hasInitialResponse,
           }}
         />
+        <EthRates eth={eth.data} ethPerItem={eth.perItem} />
       </div>
 
       <CourseList courses={courses}>
@@ -28,15 +34,27 @@ export default function Marketplace({ courses }) {
           <CourseCard
             course={course}
             key={course.id}
+            disabled={!canPurchaseCourse}
             Footer={() => (
               <div className="mt-4">
-                <Button variant="lightPurple">Purchase</Button>
+                <Button
+                  disabled={!canPurchaseCourse}
+                  variant="lightPurple"
+                  onClick={() => setSelectedCourse(course)}
+                >
+                  Purchase
+                </Button>
               </div>
             )}
           />
         )}
       </CourseList>
-      <OrderModal />
+      {selectedCourse && (
+        <OrderModal
+          course={selectedCourse}
+          onClose={() => setSelectedCourse(null)}
+        />
+      )}
     </>
   );
 }
