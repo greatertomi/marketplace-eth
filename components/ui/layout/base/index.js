@@ -1,5 +1,6 @@
 import { Footer, Navbar } from "@components/ui/common";
 import { Web3Provider } from "@components/providers";
+// import Script from "next/script";
 
 export default function BaseLayout({ children }) {
   return (
