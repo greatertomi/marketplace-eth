@@ -22,7 +22,7 @@ export default function Header() {
     <>
       <Walletbar />
       <EthRates />
-      <div className="flex flex-row-reverse py-4 px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-row-reverse p-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={LINKS} />
       </div>
     </>

@@ -1,17 +1,14 @@
 import { MarketHeader } from "@components/ui/marketplace";
 import { BaseLayout } from "@components/ui/layout";
-import { CourseFilter, OwnedCourseCard } from "@components/ui/course";
-import { Button } from "@components/ui/common";
+import { CourseFilter } from "@components/ui/course";
 
 export default function ManageCourses() {
   return (
     <div>
-      <div className="py-4">
-        <MarketHeader />
-        <CourseFilter />
-      </div>
+      <MarketHeader />
+      <CourseFilter />
       <section className="grid grid-cols-1">
-        <OwnedCourseCard>
+        {/*<OwnedCourseCard>
           <div className="flex mr-2 relative rounded-md">
             <input
               type="text"
@@ -22,7 +19,7 @@ export default function ManageCourses() {
             />
             <Button>Verify</Button>
           </div>
-        </OwnedCourseCard>
+        </OwnedCourseCard>*/}
       </section>
     </div>
   );
