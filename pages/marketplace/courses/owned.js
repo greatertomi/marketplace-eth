@@ -1,25 +1,37 @@
 import { MarketHeader } from "@components/ui/marketplace";
 import { BaseLayout } from "@components/ui/layout";
+import { getAllCourses } from "@content/courses/fetcher";
+import { useAccount, useOwnedCourses } from "@components/hooks/web3";
 import { OwnedCourseCard } from "@components/ui/course";
-import { Button, Message } from "@components/ui/common";
-import { useOwnedCourses } from "@components/hooks/web3";
+import { Button } from "@components/ui/common";
 
-export default function OwnedCourses() {
-  const { ownedCourses } = useOwnedCourses();
+export default function OwnedCourses({ courses }) {
+  const { account } = useAccount();
+  const { ownedCourses } = useOwnedCourses(courses, account.data);
   return (
     <div>
-      {ownedCourses.data}
       <div className="py-4">
         <MarketHeader />
       </div>
       <section className="grid grid-cols-1">
-        <OwnedCourseCard>
-          <Message>My custom message!</Message>
-          <Button>Watch the course</Button>
-        </OwnedCourseCard>
+        {ownedCourses.data.data?.map((course) => (
+          <OwnedCourseCard key={course.id} course={course}>
+            {/*<Message>My custom message!</Message>*/}
+            <Button>Watch the course</Button>
+          </OwnedCourseCard>
+        ))}
       </section>
     </div>
   );
+}
+
+export function getStaticProps() {
+  const { data } = getAllCourses();
+  return {
+    props: {
+      courses: data,
+    },
+  };
 }
 
 OwnedCourses.Layout = BaseLayout;
